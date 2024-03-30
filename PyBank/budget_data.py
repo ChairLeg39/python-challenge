@@ -9,7 +9,7 @@ header = []
 total_months = 0
 
 # open csv file and read it
-with open(csvpath_in, "r") as csvfile:
+with open(csvpath_in, 'r') as csvfile:
     # store contents of the csv file into csvreader
     csvreader = csv.reader(csvfile, delimiter=",")
     
@@ -19,6 +19,15 @@ with open(csvpath_in, "r") as csvfile:
     for row in csvreader:
         total_months += 1
 
-print(total_months)
 
 
+out_file_path = "PyBank/Analysis/budget_data_analysis.txt"
+
+with open(out_file_path, 'w') as analysis:
+    analysis.write('Financial Analysis\n'
+                    '-----------------------------------\n'
+                    f'Total Months: {total_months}\n'
+                    f'Total: \n'
+                    f'Average Change: \n'
+                    f'Greatest Increase in Profits: \n'
+                    f'Greatest Decrease in Profits: \n')
