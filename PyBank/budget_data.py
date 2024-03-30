@@ -7,7 +7,12 @@ csvpath_in = "PyBank/Resources/budget_data.csv"
 # set variables
 header = []
 total_months = 0
+current_month_profit_loss = 0
+previous_month_profit_loss = 0
 total_profit_losses = 0
+total_change = 0
+changes = []
+average_change = 0
 
 # open csv file and read it
 with open(csvpath_in, 'r') as csvfile:
@@ -19,13 +24,34 @@ with open(csvpath_in, 'r') as csvfile:
 
     # loop through each row
     for row in csvreader:
+        
         # count the number of rows, which will equal total months
+        # print(total_months) outputs 0 on first run
         total_months += 1
+        # print(total_months) outputs 1 on first run
 
-        # add the profit/losses column
-        total_profit_losses += int(row[1])
+        # store current month value, first run will include first value in Cell B2
+        current_month_profit_loss = int(row[1])
+        
+        # add up each month to calculate total profit loss
+        total_profit_losses += current_month_profit_loss
 
+        # initiate IF on second run
+        if total_months > 1:
+            # calculate change from month to month
+            # previous month variable has not been overwritten
+            change = current_month_profit_loss - previous_month_profit_loss
+            #  add change calc from above to changes list
+            changes.append(change)
+            #  sum all changes and stores in total change
+            total_change += change
 
+        # first run will skip IF and will store Cell B2 to previous month
+        # second run will overwrite and store Cell B3 to previous month
+        previous_month_profit_loss = current_month_profit_loss
+
+# calc avg change, len(changes) will provide a count of all values stored in changes list 
+average_change = total_change / len(changes)
 
 out_file_path = "PyBank/Analysis/budget_data_analysis.txt"
 
@@ -34,6 +60,6 @@ with open(out_file_path, 'w') as analysis:
                     '-----------------------------------\n'
                     f'Total Months: {total_months}\n'
                     f'Total: ${total_profit_losses}\n'
-                    f'Average Change: \n'
+                    f'Average Change: ${average_change:.2f}\n'
                     f'Greatest Increase in Profits: \n'
                     f'Greatest Decrease in Profits: \n')
