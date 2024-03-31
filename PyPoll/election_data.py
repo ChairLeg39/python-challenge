@@ -60,7 +60,10 @@ with open(out_file_path, 'w') as analysis:
 # print(f'Total Votes: {total_votes}')
 # print('-------------------------')
 
-# print(len(candidates), "candidates")
+print(len(candidates), "candidates")
+print(candidates[0])
+print(candidates[1])
+print(candidates[2])
 # print(candidates, "candidates")
 # print the results to file
 
