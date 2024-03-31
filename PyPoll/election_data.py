@@ -2,8 +2,8 @@
 import csv
 
 # Needed:
-# 1. The total number of votes cast - done
-# 2. A complete list of candidates who received votes - done*
+# 1. The total number of votes cast
+# 2. A complete list of candidates who received votes
 # 3. The percentage of votes each candidate won
 # 4. The total number of votes each candidate won
 # 5. The winner of the election based on popular vote
@@ -58,75 +58,46 @@ with open(election_file_path, 'r') as election_file:
             # sum up votes for each candidate
             candidates_votes[candidate] += 1
 
-# search for candidate namme in the candidate_votes dict (to calc % of votes)
+# search for candidate name in the candidate_votes dict (to calc % of votes and winner)
 for candidate in candidates_votes.keys():
 
-    # store vote count for each candidate as int
-    votes = candidates_votes[candidate]
-
-    # calc % of votes
-    percentage = (votes / total_votes) * 100
-
-    # store percentage in a new dict
-    candidates_percentage[candidate] = {"votes": votes, "percentage": percentage}
-
-print(f'{candidates_percentage}')
-
-# search for candidate namme in the candidate_votes dict (to calc winner)
-for candidate in candidates_votes.keys():
-    
     # store vote count for each candidate as int
     votes = candidates_votes[candidate]
     # print(candidate) prints candidate names
     # print(votes) prints the votes count as int
     # print(candidates_votes) prints the whole dict as key value pairs
-    
+
+    # calc % of votes
+    percentage = (votes / total_votes) * 100
+
+    # store percentage in a new dict, key is candidate name and value is percentage
+    # candidates_percentage[candidate] = {"votes": votes, "percentage": percentage}
+    candidates_percentage[candidate] = percentage
+   
     # calc winner based on popular vote
     if votes > max_votes:
         max_votes = votes
         winner = candidate
 
-# print(winner)
-# print(max_votes)
+# candidates_votes = {'Charles Casper Stockham': 85213, 'Diana DeGette': 272892, 'Raymon Anthony Doane': 11606}
+# candidates_percentages = {'Charles Casper Stockham': 23.049, 'Diana DeGette': 73.812, 'Raymon Anthony Doane': 3.139}
 
-# out_file_path = "PyPoll/Analysis/election_data_analysis.txt"
+out_file_path = "PyPoll/Analysis/election_data_analysis.txt"
 
-# with open(out_file_path, 'w') as analysis:
-#     analysis.write('Election Results\n'
-#                     '-----------------------------------\n'
-#                     f'Total Votes: {total_votes}\n'
-#                     '-----------------------------------\n'
-#                     f'\n'
-#                     f'\n'
-#                     f'\n'
-#                     '-----------------------------------\n'
-#                     f'Winner: {winner}')
+with open(out_file_path, 'w') as analysis:
+    # write header and total votes
+    analysis.write('Election Results\n')
+    analysis.write('-----------------------------------\n')
+    analysis.write(f'Total Votes: {total_votes}\n')
+    analysis.write('-----------------------------------\n')
+    
+    # write each candidate's result
+    for candidate in candidates_votes:
+        votes = candidates_votes[candidate]
+        percentage = candidates_percentage[candidate]
+        analysis.write(f'{candidate}: {percentage:.3f}% ({votes})\n')
 
-
-# print the results to screen
-# print('Election Results')
-# print('-------------------------')
-# print(f'Total Votes: {total_votes}')
-# print('-------------------------')
-
-# print(len(candidates), "candidates")
-# print(candidates[0])
-# print(candidates[1])
-# print(candidates[2])
-# print(candidates, "candidates")
-# print the results to file
-
-
-# end here
-
-# example output
-# Election Results
-# -------------------------
-# Total Votes: 369711
-# -------------------------
-# Charles Casper Stockham: 23.049% (85213)
-# Diana DeGette: 73.812% (272892)
-# Raymon Anthony Doane: 3.139% (11606)
-# -------------------------
-# Winner: Diana DeGette
-# -------------------------
+    # write the winner
+    analysis.write('-----------------------------------\n')
+    analysis.write(f'Winner: {winner}\n')
+    analysis.write('-----------------------------------\n')
