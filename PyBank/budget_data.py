@@ -18,6 +18,10 @@ average_change = 0
 greatest_increase = 0
 greatest_increase_month = str()
 
+# set variables for calc greatest decrease in profits
+greatest_decrease = 0
+greatest_decrease_month = str()
+
 # open csv file and read it
 with open(csvpath_in, 'r') as csvfile:
     # store contents of the csv file into csvreader
@@ -45,11 +49,14 @@ with open(csvpath_in, 'r') as csvfile:
         
         # initiate IF on second run
         if total_months > 1:
+
             # calculate change from month to month
             # previous month variable has not been overwritten
             change = current_month_profit_loss - previous_month_profit_loss
+
             #  add change calc from above to changes list
             changes.append(change)
+
             #  sum all changes and stores in total change
             total_change += change
 
@@ -57,6 +64,11 @@ with open(csvpath_in, 'r') as csvfile:
             if change > greatest_increase:
                 greatest_increase = change
                 greatest_increase_month = month
+
+            # checking for greatest increase in profits
+            if change < greatest_decrease:
+                greatest_decrease = change
+                greatest_decrease_month = month
 
         # first run will skip IF and will store Cell B2 to previous month
         # second run will overwrite and store Cell B3 to previous month
@@ -73,5 +85,5 @@ with open(out_file_path, 'w') as analysis:
                     f'Total Months: {total_months}\n'
                     f'Total: ${total_profit_losses}\n'
                     f'Average Change: ${average_change:.2f}\n' # .2f formats as a floating point number with two decimal places
-                    f'Greatest Increase in Profits: {greatest_increase_month} ${greatest_increase}\n'
-                    f'Greatest Decrease in Profits: \n')
+                    f'Greatest Increase in Profits: {greatest_increase_month} (${greatest_increase})\n'
+                    f'Greatest Decrease in Profits: {greatest_decrease_month} (${greatest_decrease})')
