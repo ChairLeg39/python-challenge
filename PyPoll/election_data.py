@@ -15,6 +15,10 @@ election_file_path = "PyPoll/Resources/election_data.csv"
 total_votes = 0
 candidates = []
 header = []
+candidates_votes = {} # key is candidate name, value is vote count
+votes = 0
+max_votes = 0
+winner = str()
 
 # open csv file and read it 
 with open(election_file_path, 'r') as election_file:
@@ -45,13 +49,42 @@ with open(election_file_path, 'r') as election_file:
             # add to list if they haven't been added to the list
             candidates.append(candidate)
 
+        # check to see if the candidate exists in the dictionary (same as comic book)
+        if candidate not in candidates_votes:
+            candidates_votes[candidate] = 1
+        else:
+            # sum up votes for each candidate
+            candidates_votes[candidate] += 1
+
+# search for candidate in the candidate_votes dict
+for candidate in candidates_votes.keys():
+    
+    # store vote count for each candidate as int
+    votes = candidates_votes[candidate]
+    # print(candidate) prints candidate names
+    # print(votes) prints the votes count as int
+    # print(candidates_votes) prints the whole dict as key value pairs
+    
+    # calc winner based on popular vote
+    if votes > max_votes:
+        max_votes = votes
+        winner = candidate
+
+# print(winner)
+# print(max_votes)
+
 out_file_path = "PyPoll/Analysis/election_data_analysis.txt"
 
 with open(out_file_path, 'w') as analysis:
     analysis.write('Election Results\n'
                     '-----------------------------------\n'
                     f'Total Votes: {total_votes}\n'
-                    '-----------------------------------\n')
+                    '-----------------------------------\n'
+                    f'\n'
+                    f'\n'
+                    f'\n'
+                    '-----------------------------------\n'
+                    f'Winner: {winner}')
 
 
 # print the results to screen
@@ -60,10 +93,10 @@ with open(out_file_path, 'w') as analysis:
 # print(f'Total Votes: {total_votes}')
 # print('-------------------------')
 
-print(len(candidates), "candidates")
-print(candidates[0])
-print(candidates[1])
-print(candidates[2])
+# print(len(candidates), "candidates")
+# print(candidates[0])
+# print(candidates[1])
+# print(candidates[2])
 # print(candidates, "candidates")
 # print the results to file
 
