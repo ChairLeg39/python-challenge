@@ -18,6 +18,8 @@ header = []
 candidates_votes = {} # key is candidate name, value is vote count
 votes = 0
 max_votes = 0
+percentage = 0
+candidates_percentage = {}
 winner = str()
 
 # open csv file and read it 
@@ -56,7 +58,21 @@ with open(election_file_path, 'r') as election_file:
             # sum up votes for each candidate
             candidates_votes[candidate] += 1
 
-# search for candidate in the candidate_votes dict
+# search for candidate namme in the candidate_votes dict (to calc % of votes)
+for candidate in candidates_votes.keys():
+
+    # store vote count for each candidate as int
+    votes = candidates_votes[candidate]
+
+    # calc % of votes
+    percentage = (votes / total_votes) * 100
+
+    # store percentage in a new dict
+    candidates_percentage[candidate] = {"votes": votes, "percentage": percentage}
+
+print(f'{candidates_percentage}')
+
+# search for candidate namme in the candidate_votes dict (to calc winner)
 for candidate in candidates_votes.keys():
     
     # store vote count for each candidate as int
@@ -73,18 +89,18 @@ for candidate in candidates_votes.keys():
 # print(winner)
 # print(max_votes)
 
-out_file_path = "PyPoll/Analysis/election_data_analysis.txt"
+# out_file_path = "PyPoll/Analysis/election_data_analysis.txt"
 
-with open(out_file_path, 'w') as analysis:
-    analysis.write('Election Results\n'
-                    '-----------------------------------\n'
-                    f'Total Votes: {total_votes}\n'
-                    '-----------------------------------\n'
-                    f'\n'
-                    f'\n'
-                    f'\n'
-                    '-----------------------------------\n'
-                    f'Winner: {winner}')
+# with open(out_file_path, 'w') as analysis:
+#     analysis.write('Election Results\n'
+#                     '-----------------------------------\n'
+#                     f'Total Votes: {total_votes}\n'
+#                     '-----------------------------------\n'
+#                     f'\n'
+#                     f'\n'
+#                     f'\n'
+#                     '-----------------------------------\n'
+#                     f'Winner: {winner}')
 
 
 # print the results to screen
