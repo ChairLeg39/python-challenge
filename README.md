@@ -1,7 +1,7 @@
 # Python Projects Summary: PyBank and PyPoll
 
 ## Overview
-This repository contains two distinct Python projects: PyBank Financial Analysis and PyPoll Election Analysis. Both projects are designed to demonstrate the practical application of Python programming in automating and solving complex tasks. PyBank focuses on financial data analysis, while PyPoll addresses the modernization of the vote-counting process in elections.
+This repository contains two distinct Python projects: PyBank Financial Analysis and PyPoll Election Analysis. Both projects are designed to demonstrate the practical application of Python programming in automating and solving complex tasks. PyBank focuses on financial data analysis, while PyPoll addresses the vote-counting process in elections.
 
 ## Objectives
 The main objectives of these projects are to showcase the ability to:
