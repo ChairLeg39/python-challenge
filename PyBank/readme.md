@@ -21,10 +21,10 @@ Utilized the `csv` module to read from and write to CSV files, showcasing the ab
 Demonstrated the use of Python's file operations to not only read data from a file but also to write the analysis results back to a new file - `analysis.txt`.
 
 ### Variables and Data Structures
-Applied variables for storing single data points and lists for collecting a series of data points, such as monthly changes in profit/losses.
+Utilized variables to store individual data points and implemented lists to aggregate a series of data points, such as monthly changes in profit/losses. The use of lists in the script enabled efficient collection and manipulation of sequential data, demonstrating their practical application in organizing and handling dynamic datasets.
 
 ### Loops and Conditionals
-Used for loops to iterate over each row in the dataset and conditional statements to calculate the greatest increase and decrease in profits.
+Employed for loops to systematically iterate over each row in the dataset, leveraging lists to dynamically record and update monthly changes in profit/losses. Utilized conditional statements within these loops to identify and calculate the greatest increase and decrease in profits, showcasing how lists, combined with loops and conditionals, facilitate detailed data analysis and decision-making processes in Python scripts.
 
 ### Debugging
 Through the development process, debugging was essential in ensuring the script ran correctly and the final output matched expected results.
