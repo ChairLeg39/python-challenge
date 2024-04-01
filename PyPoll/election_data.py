@@ -1,13 +1,6 @@
 #  import csv module
 import csv
 
-# Needed:
-# 1. The total number of votes cast
-# 2. A complete list of candidates who received votes
-# 3. The percentage of votes each candidate won
-# 4. The total number of votes each candidate won
-# 5. The winner of the election based on popular vote
-
 # set path for file
 election_file_path = "PyPoll/Resources/election_data.csv"
 
@@ -30,9 +23,6 @@ with open(election_file_path, 'r') as election_file:
 
     # skips the header row, stores column headers in header
     header = next(csv_file)
-    # print(header[0])
-    # print(header[1])
-    # print(header[2])
 
     # read a row in the file, loop through each row
     for row in csv_file:
@@ -71,7 +61,6 @@ for candidate in candidates_votes.keys():
     percentage = (votes / total_votes) * 100
 
     # store percentage in a new dict, key is candidate name and value is percentage
-    # candidates_percentage[candidate] = {"votes": votes, "percentage": percentage}
     candidates_percentage[candidate] = percentage
    
     # calc winner based on popular vote

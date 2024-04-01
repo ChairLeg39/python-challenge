@@ -34,9 +34,7 @@ with open(csvpath_in, 'r') as csvfile:
     for row in csvreader:
 
         # count the number of rows, which will equal total months
-        # print(total_months) outputs 0 on first run
         total_months += 1
-        # print(total_months) outputs 1 on first run
 
         # store current month value, first run will include first value in Cell B2
         current_month_profit_loss = int(row[1])
