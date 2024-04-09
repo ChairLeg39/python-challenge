@@ -24,19 +24,20 @@ greatest_decrease_month = str()
 
 # open csv file and read it
 with open(csvpath_in, 'r') as csvfile:
+    
     # store contents of the csv file into csvreader
     csvreader = csv.reader(csvfile, delimiter=",")
     
-    # skip the header row, but store the header in header list
+    # skip the header row
     header = next(csvreader)
 
     # loop through each row
     for row in csvreader:
 
-        # count the number of rows, which will equal total months
+        # count the number of rows
         total_months += 1
 
-        # store current month value, first run will include first value in Cell B2
+        # store current month value
         current_month_profit_loss = int(row[1])
         
         # add up each month to calculate total profit loss
@@ -49,13 +50,12 @@ with open(csvpath_in, 'r') as csvfile:
         if total_months > 1:
 
             # calculate change from month to month
-            # previous month variable has not been overwritten
             change = current_month_profit_loss - previous_month_profit_loss
 
-            #  add change calc from above to changes list
+            # add change calc from above to changes list
             changes.append(change)
 
-            #  sum all changes and stores in total change
+            # sum all changes and stores in total change
             total_change += change
 
             # checking for greatest increase in profits
@@ -68,12 +68,21 @@ with open(csvpath_in, 'r') as csvfile:
                 greatest_decrease = change
                 greatest_decrease_month = month
 
-        # first run will skip IF and will store Cell B2 to previous month
-        # second run will overwrite and store Cell B3 to previous month
+        # overwrite previous month profit loss
         previous_month_profit_loss = current_month_profit_loss
 
-# calc avg change, len(changes) will provide a count of all values stored in changes list 
+# test print total_months and total_profit_losses to terminal
+print(total_months)
+print(total_profit_losses)
+
+# calc avg change
 average_change = total_change / len(changes)
+# test print average_average to terminal
+print(f'${average_change:.2f}')
+
+# test print greatest inc and dec month and values to terminal
+print((greatest_increase_month),(f'${greatest_increase}'))
+print((greatest_decrease_month),(f'${greatest_decrease}'))
 
 out_file_path = "PyBank/Analysis/budget_data_analysis.txt"
 
@@ -82,6 +91,6 @@ with open(out_file_path, 'w') as analysis:
                     '-----------------------------------\n'
                     f'Total Months: {total_months}\n'
                     f'Total: ${total_profit_losses}\n'
-                    f'Average Change: ${average_change:.2f}\n' # .2f formats as a floating point number with two decimal places
+                    f'Average Change: ${average_change:.2f}\n'
                     f'Greatest Increase in Profits: {greatest_increase_month} (${greatest_increase})\n'
                     f'Greatest Decrease in Profits: {greatest_decrease_month} (${greatest_decrease})')
